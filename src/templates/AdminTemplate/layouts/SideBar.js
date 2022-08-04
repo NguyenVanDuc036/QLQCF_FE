@@ -1,7 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
+import { history } from '../../../App';
 
 export default function SideBar() {
+
+  const user = JSON.parse(localStorage.getItem('userLogin'))
+
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
         {/* Brand Logo */}
@@ -27,7 +31,7 @@ export default function SideBar() {
             </div>
             <div className="info">
               <h5 href="#" className="d-block text-light">
-                Alexander Pierce
+                {user.name}
               </h5>
             </div>
           </div>
@@ -44,14 +48,36 @@ export default function SideBar() {
          with font-awesome or any other icon font library */}
 
               <li className="nav-item">
-                <NavLink to="/admin/thong-ke-tong-hop" className="nav-link">
-                  <i style={{color:'#0090e7'}} className="nav-icon fas fa-th" />
+                <a href="#" className="nav-link">
+                <i style={{color:'green'}}  class="fas fa-chart-line nav-icon"></i>
                   <p>
                     Thống kê tổng hợp
-                    {/* <span className="right badge badge-danger">New</span> */}
+                    <i className="fas fa-angle-left right" />
                   </p>
-                </NavLink>
+                </a>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <NavLink to="/admin/phan-tich-du-lieu" className="nav-link">
+                      <i className="far fa-circle nav-icon" />
+                      <p>Phân tích dữ liệu</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/admin/thong-ke-doanh-thu"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Thống kê doanh thu</p>
+                    </NavLink>
+                  </li>
+                </ul>
               </li>
+
+
+
+
+
               <li className="nav-item">
                 <a href="#" className="nav-link">
                 <i style={{color:'#fc424a'}} class="fas fa-users nav-icon"></i>
@@ -78,7 +104,7 @@ export default function SideBar() {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a href="#" className="nav-link">
                   <i style={{color:'#ffab00'}} class="fas fa-chair nav-icon"></i>
                   <p>
@@ -100,7 +126,7 @@ export default function SideBar() {
                     </NavLink>
                   </li>
                 </ul>
-              </li>
+              </li> */}
 
               <li className="nav-item">
                 <a href="#" className="nav-link">
@@ -138,8 +164,28 @@ export default function SideBar() {
                     </NavLink>
                   </li>
 
+
+                 
+
+
+
+
                 </ul>
               </li>
+
+               <li onClick={()=>{
+                  localStorage.removeItem("userLogin");
+                  history.push("/");
+               }} >
+                <a href="" className="nav-link">
+              
+                  <i class="fas text-danger mr-3 fa-sign-out"></i>
+                  <p>
+                    Đăng xuất
+                    <i className="right fas fa-angle-left" />
+                  </p>
+                </a>
+              </li> 
 
             </ul>
           </nav>

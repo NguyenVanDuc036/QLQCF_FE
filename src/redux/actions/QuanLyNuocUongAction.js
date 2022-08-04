@@ -3,8 +3,9 @@ import Swal from 'sweetalert2'
 import { history } from './../../App';
 import { Redirect } from 'react-router';
 
-import { LAY_DANH_SACH_NUOC_UONG, LAY_CHI_TIET_NUOC_UONG, LAY_DANH_SACH_LOAI_NUOC, CHON_NUOC_UONG, HUY_MON, THEM_MON, GIAM_MON, THEM_HUY_MON } from "./types/QuanLyNuocUongType";
+import { LAY_DANH_SACH_NUOC_UONG, LAY_CHI_TIET_NUOC_UONG, LAY_DANH_SACH_LOAI_NUOC, CHON_NUOC_UONG, HUY_MON, THEM_MON, GIAM_MON, THEM_HUY_MON, RESET_BILL_DETAIL, UPDATE_BILL, THEM_HUY_MON_UPDATE, HUY_MON_UPDATE } from "./types/QuanLyNuocUongType";
 import { qlNuocUongService } from "../../service/QuanLyNuocUongService";
+import { changeTabActiveAction } from "./QuanLyUngDung";
 
 export  const layDanhSachNuocUongAction = (name='') => {
 
@@ -12,6 +13,8 @@ export  const layDanhSachNuocUongAction = (name='') => {
         try {
 
             const result = await  qlNuocUongService.layDanhSachNuocUong(name);
+
+            
             dispatch({
                 type:LAY_DANH_SACH_NUOC_UONG,
                 payload:result.data
@@ -104,7 +107,9 @@ export  const xoaNuocUongAction = ( id) => {
         try {
 
             const result = await qlNuocUongService.xoaNuocUong(id);
+
             dispatch(layDanhSachNuocUongAction())           
+            
             } catch (error) {
                 await Swal.fire({
                     icon: 'error',
@@ -120,7 +125,7 @@ export  const xoaNuocUongAction = ( id) => {
 
 
 
-export  const layDanhSachLoaiNuocAction = ( ) => {
+export  const layDanhSachLoaiNuocAction = () => {
 
     return async (dispatch,getState) => {
         try {
@@ -155,8 +160,29 @@ export  const layBangTen = (name ) => {
             }
     }
 }
+export  const capNhatConHangAction = (name ) => {
 
-// name , imgSrc , price , size , typeOfDrink_id , status
+    return async (dispatch,getState) => {
+        try {
+            const result = await qlNuocUongService.capNhatConHang(name);        
+            await dispatch(layDanhSachNuocUongAction())
+            } catch (error) {
+                console.log(error);
+            }
+    }
+}
+
+export  const capNhatHetHangAction = (name ) => {
+
+    return async (dispatch,getState) => {
+        try {
+            const result = await qlNuocUongService.capNhatHetHang(name);        
+            await dispatch(layDanhSachNuocUongAction())
+            } catch (error) {
+                console.log(error);
+            }
+    }
+}
 
 
 
@@ -170,10 +196,32 @@ export const chonNuocAction = (nuoc) => {
     }
 }
 
+export const updateBillAction = (nuoc) => {
+    return async (dispatch,getState) => {
+        await dispatch({
+            type:UPDATE_BILL,
+            payload : nuoc
+        })
+
+        await dispatch(changeTabActiveAction(3))
+
+    }
+}
+
 export const huyMonAction= (id) => {
     return async (dispatch,getState) => {
         await dispatch({
             type:HUY_MON,
+            payload : id
+        })
+
+    }
+}
+
+export const huyMonUpdateAction= (id) => {
+    return async (dispatch,getState) => {
+        await dispatch({
+            type:HUY_MON_UPDATE,
             payload : id
         })
 
@@ -189,5 +237,25 @@ export const themHuyMonAction= (payload) => {
 
     }
 }
+
+export const themHuyMonUpdateAction= (payload) => {
+    return async (dispatch,getState) => {
+        await dispatch({
+            type:THEM_HUY_MON_UPDATE,
+            payload : payload
+        })
+
+    }
+}
+export const resetChiTietBillAction= (payload) => {
+    return async (dispatch,getState) => {
+        await dispatch({
+            type:RESET_BILL_DETAIL,
+        })
+
+    }
+}
+
+
 
 

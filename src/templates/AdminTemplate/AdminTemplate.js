@@ -8,7 +8,11 @@ import Swal from 'sweetalert2';
 import { history } from '../../App';
 
 export default function AdminTemplate(props) {
+
+
+  
   useEffect(() => {
+
     if(!localStorage.getItem('userLogin')){
         Swal.fire({
          icon: 'error',
@@ -19,7 +23,30 @@ export default function AdminTemplate(props) {
        history.push('/')
     }
 
+    if(localStorage.getItem('userLogin')){
+      var userLogin = JSON.parse(localStorage.getItem('userLogin'));
+      
+      if(userLogin.position != 'quanLy'){
+        Swal.fire({
+          icon: 'error',
+          title: 'Bạn không có quyền truy cập',
+          text: 'Bạn cần đăng nhập bằng tài khoản quản lý!',
+        })
+        history.push('/')
+      }
+       
+    }
+
+    
+
+
+
+
+
   }, []);
+
+
+
   return (
     <Route exact path={props.path} render={(propsRoute) => {
       return <div className="wrapper">

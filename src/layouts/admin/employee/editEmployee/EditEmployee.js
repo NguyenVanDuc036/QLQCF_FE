@@ -15,10 +15,14 @@ function callback(key) {
 
 export default function EditEmployee(props) {
     const dispatch = useDispatch()
+
+    // Khi mới vào component, sẽ gọi chi tiết nhân viên với id được lấy từ trên url
     useEffect(() => {
         dispatch(layChiTietNhanVien(props.match.params.id))
     }, []);
 
+
+    // Lấy chi tiết nhân viên từ redux về
     const { chiTietNhanVien } = useSelector(
         (state) => state.QuanLyNguoiDungReducer
     );
@@ -42,6 +46,8 @@ export default function EditEmployee(props) {
         formik.setFieldValue('startedDate',values)
     }
     // name , email , password , startedDate , position , numberPhone
+
+    // Sử dụng formik để xử lý form
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {

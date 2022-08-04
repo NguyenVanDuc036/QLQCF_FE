@@ -30,10 +30,8 @@ export class QuanLyNuocUongService extends baseService {
         return this.delete(`${DOMAIN}/waters/${id}`)
     }
 
-    layDanhSachLoaiNuoc = (name='') => {
-
+    layDanhSachLoaiNuoc = () => {
         return this.get(`${DOMAIN}/drinks`)
-
     }
 
     layDanhSachLoaiNuoc = (name='') => {
@@ -46,6 +44,14 @@ export class QuanLyNuocUongService extends baseService {
         return this.post(`${DOMAIN}/waters/getbyname`,name)
     }
 
+
+    capNhatConHang =(name)=>{
+        return this.put(`${DOMAIN}/waters/conhang/${name}`,name)
+    }
+
+    capNhatHetHang =(name)=>{
+        return this.put(`${DOMAIN}/waters/hethang/${name}`,name)
+    }
    
 
 }

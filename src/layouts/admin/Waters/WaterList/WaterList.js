@@ -24,8 +24,10 @@ export default function GoodsList() {
     (state) => state.QuanLyNuocUongReducer
   );
 
-  console.log({danhSachNuocUong});
-  const data = danhSachNuocUong
+  var data = []
+  for(var i = 0 ; i<danhSachNuocUong.length ; i++){
+    data.push(danhSachNuocUong[i][0])
+  }
 
   const columns = [
     {
@@ -171,8 +173,8 @@ export default function GoodsList() {
               />
             </Space>
             <button  style={{height:'45px'}} onClick={()=>{
-              history.push('/admin/good/addgoods')
-            }} className=" p-2 btn-them  ml-5" >Thêm hàng hóa</button>
+              history.push('/admin/water/addwater')
+            }} className=" p-2 btn-them  ml-5" >Thêm nước uống</button>
 
 
           </div>

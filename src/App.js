@@ -22,6 +22,8 @@ import PieChart from './layouts/admin/statistics/pieChart/PieChart';
 import WorkPlaceTemplate from './templates/WorkPlaceTemplate/WorkPlaceTemplate';
 import PhucVu from './layouts/phucVu/PhucVu';
 import Login from './layouts/Login/Login';
+import ThuNgan from './layouts/thuNgan/ThuNgan';
+import PhaChe from './layouts/phaChe/PhaChe';
 export const history = createBrowserHistory();
 
 function App() {
@@ -32,9 +34,16 @@ function App() {
       <Switch>
         
         <Route path={"/phucvu"} component={PhucVu} />
-        <Route exact path={"/"} component={Login} />
+        <Route exact path={"/thungan"} component={ThuNgan} />
+        <Route exact path={"/phache"} component={PhaChe} />
 
+        {/* <Route exact path={"*"} component={Login} /> */}
+
+
+        <Route exact path={"/"} component={Login} />
+        
         <AdminTemplate path="/admin/home" component={MyAdmin} />
+        <AdminTemplate path="/admin/home" component={ThuNgan} />
 
         
         <AdminTemplate path="/admin/employee/addEmployee" component={AddEmployee} />
@@ -42,9 +51,12 @@ function App() {
         <AdminTemplate path="/admin/employees" component={EmployeeList} />
         <AdminTemplate path="/admin/employee/shifts/:id" component={Shifts} />
         
+
         
-        
-        <AdminTemplate path="/admin/thong-ke-tong-hop" component={ThongKe} />
+        <AdminTemplate path="/admin/phan-tich-du-lieu" component={PieChart} />
+        <AdminTemplate path="/admin/thong-ke-doanh-thu" component={ThongKe} />
+
+
         <AdminTemplate path="/admin/danh-sach-ban" component={MyAdmin} />
         <AdminTemplate path="/admin/them-ban" component={MyAdmin} />
         <AdminTemplate path="/admin/danh-sach-hang-hoa" component={MyAdmin} />
@@ -56,8 +68,8 @@ function App() {
         <AdminTemplate path="/admin/good/addGoods" component={AddGoods} />
         
 
-        <AdminTemplate path="/admin/waters" component={WaterList} />
         <AdminTemplate path="/admin/water/addwater" component={AddWater} />
+        <AdminTemplate path="/admin/waters" component={WaterList} />
         <AdminTemplate path="/admin/water/updatewater/:id" component={UpdateWater} />
 
 

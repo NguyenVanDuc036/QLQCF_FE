@@ -1,4 +1,4 @@
-import { LAY_DANH_SACH_BAN ,LAY_CHI_TIET_TANG, CHON_BAN, TIM_BAN} from "../actions/types/QuanLyBanType";
+import { LAY_DANH_SACH_BAN ,LAY_CHI_TIET_TANG, CHON_BAN, TIM_BAN, RESET_ALL} from "../actions/types/QuanLyBanType";
 
 
 const stateDefault = {
@@ -46,6 +46,7 @@ export const QuanLyBanReducer = (state = stateDefault,action)=>{
 
 
             // Lấy danh sách bàn trông
+            state.tongBanTrong =[]
             const danhSachBanTrong = [...state.tongBanTrong]
             for(var i = 0; i< state.danhSachBan.length ; i++){
                 for(var j = 0; j < state.danhSachBan[i].length;j++){
@@ -54,12 +55,10 @@ export const QuanLyBanReducer = (state = stateDefault,action)=>{
                     }
                 }
             }
-            state.tongBanTrong =[]
             state.tongBanTrong = [...danhSachBanTrong]
 
 
-            
-
+        
             
             // Ghế toàn quán
             state.gheToanQuan = 0;
@@ -110,6 +109,7 @@ export const QuanLyBanReducer = (state = stateDefault,action)=>{
 
         case CHON_BAN : {
             state.banDuocChon = action.payload
+            console.log(action.payload);
             return {...state}
         }
         
@@ -117,6 +117,15 @@ export const QuanLyBanReducer = (state = stateDefault,action)=>{
             const danhSachBanTrong = [...state.tongBanTrong]
             let index = danhSachBanTrong.findIndex(ban => ban.id === action.payload)
             state.banDuocChon = {...danhSachBanTrong[index]}
+            return {...state}
+        }
+
+
+        
+        case RESET_ALL : {
+
+            state.banDuocChon = {name:0 , numberOfSeat : 0};
+
             return {...state}
         }
         

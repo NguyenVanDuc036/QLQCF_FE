@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { layDanhSachBanAction } from "../../../redux/actions/QuanLyBanAction";
-
+import './Ban.css'
 export default function ThongTinBan() {
 
   const dispatch = useDispatch();
@@ -34,8 +34,8 @@ export default function ThongTinBan() {
                   Bàn đang phục vụ
                 </div>
                 <div style={{alignItems:'center'}} className="d-flex" >
-                  <button className="banDatTruoc mr-2" ></button>
-                  Bàn đặt trước
+                  <button className="banDangBan mr-2" ></button>
+                  Bàn đang bận
                 </div>
               </div>
               

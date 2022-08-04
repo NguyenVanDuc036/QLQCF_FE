@@ -7,6 +7,10 @@ export class QuanLyBanService extends baseService {
     layDanhSachBanService = (name='') => {
         return this.get(`${DOMAIN}/tables?name=${name}`)
     }
+
+    doiTrangThaiService = (id) => {
+        return this.get(`${DOMAIN}/tables/status/${id}`)
+    }
   
 
 }

@@ -9,7 +9,10 @@ export  const layDanhSachNhanVienAction = (name='') => {
     return async (dispatch,getState) => {
         try {
 
+            // Gọi api để lấy danh sách nhân viên
             const result = await qlNhanVienService.layDanhSachNhanVien(name);
+
+            // Nếu lấy thành công thì đẩy danh sách nhân viên lên redux
             dispatch({
                 type:LAY_DANH_SACH_NHAN_VIEN,
                 payload:result.data
@@ -36,6 +39,10 @@ export  const dangNhapAction = (data) => {
                 history.push('/phucvu')
             }else if(result.data.employee.position == 'quanLy'){
                 history.push('/admin/home')
+            }else if(result.data.employee.position == 'thuNgan'){
+                history.push('/thungan')
+            }else if(result.data.employee.position == 'phaChe'){
+                history.push('/phaChe')
             }
 
             } catch (error) {
@@ -55,7 +62,10 @@ export  const layChiTietNhanVien = (id) => {
     return async (dispatch,getState) => {
         try {
 
+            // Sử dụng service, call api về server để lấy chi tiết nhân viên
             const result = await qlNhanVienService.layChiTietNhanVien(id);
+
+            
             dispatch({
                 type:LAY_CHI_TIET_NHAN_VIEN,
                 payload:result.data
@@ -128,7 +138,11 @@ export  const xoaNhanVienAction = ( id) => {
         try {
 
             const result = await qlNhanVienService.xoaNhanVien(id);
-            dispatch(layDanhSachNhanVienAction())           
+
+
+            dispatch(layDanhSachNhanVienAction())        
+            
+            
             } catch (error) {
                 await Swal.fire({
                     icon: 'error',

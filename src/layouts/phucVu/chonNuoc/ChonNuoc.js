@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './ChonNuoc.css'
 import { Tooltip } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { huyMonAction, themHuyMonAction } from "../../../redux/actions/QuanLyNuocUongAction";
+import { huyMonAction, huyMonUpdateAction, themHuyMonAction, themHuyMonUpdateAction } from "../../../redux/actions/QuanLyNuocUongAction";
 import Swal from 'sweetalert2';
 export default function ChonNuoc() {
   const dispatch = useDispatch();
@@ -10,9 +10,16 @@ export default function ChonNuoc() {
     (state) => state.QuanLyNuocUongReducer
   );
 
+  console.log({chiTietBill});
+
+  const { isUpdate } = useSelector(
+    (state) => state.QuanLyNuocUongReducer
+  );
+
 
 
   const renderNuocUong =()=>{
+
     return chiTietBill.map((item, index) => {
       return <tr key={index} >
       <td><h6>{item.name}</h6></td>
@@ -20,8 +27,14 @@ export default function ChonNuoc() {
             
             <Tooltip title="Thêm số lượng">
                 <button onClick={()=>{
-                  const payload = {id : item.id , number : 1}
-                  dispatch(themHuyMonAction(payload))
+                  if(!isUpdate){
+                    const payload = {id : item.id , number : 1}
+                    dispatch(themHuyMonAction(payload))
+                  }else{
+                    const payload = {waterId : item.waterId , number : 1}
+                    dispatch(themHuyMonUpdateAction(payload))
+                  }
+                  
                 }} className='btn btn-outline-success' ><i class="fas fa-plus"></i></button>
             </Tooltip>
             <Tooltip title="Số lượng">
@@ -42,7 +55,12 @@ export default function ChonNuoc() {
       <td>
         <Tooltip title="Hủy món">
             <button onClick={()=>{
-              dispatch(huyMonAction(item.id))
+               if(!isUpdate){
+                dispatch(huyMonAction(item.id))
+              }else{
+                dispatch(huyMonUpdateAction(item.waterId))
+              }
+              
             }} className='btn btn-outline-danger' ><i class="fas fa-window-close"></i></button>
         </Tooltip>
       </td>

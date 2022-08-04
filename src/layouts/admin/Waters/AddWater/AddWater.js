@@ -30,6 +30,8 @@ export default function AddWater(props) {
         (state) => state.QuanLyNuocUongReducer
     );
 
+    console.log({danhSachLoaiNuoc});
+
     const renderLoaiNuoc = ()=>{
         return danhSachLoaiNuoc.map((item, index) => {
             return <Option key={index} value={item.id}>{item.name}</Option>
@@ -173,9 +175,8 @@ export default function AddWater(props) {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="text text-danger">{formik.errors.name && formik.touched.name ? (<div>{formik.errors.name}</div>) : null} </div> */}
                 </Form.Item>
-
+                
 
 
                 <Form.Item
@@ -195,8 +196,7 @@ export default function AddWater(props) {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="text text-danger">{formik.errors.name && formik.touched.name ? (<div>{formik.errors.name}</div>) : null} </div> */}
-                </Form.Item>
+                </Form.Item> 
 
 
                 <Form.Item
@@ -219,7 +219,6 @@ export default function AddWater(props) {
 
                 <div className="flex justify-center">
                     <button className="btn btn-outline-success ml-5 btn-themNhanVien mt-3" type="submit"><i class="fas fa-cart-plus mr-2"></i> Thêm nước uống</button>
-
                 </div>
             </Form>
                 </div>

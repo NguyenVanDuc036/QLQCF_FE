@@ -12,6 +12,11 @@
     opacity: 1;
 }
 
+.ant-select-selection-item:hover .overley{
+    top: 0 !important;
+    opacity: 1 !important;
+}
+
 .card-water .card  {
     height: 230px;
     position: relative;
@@ -73,3 +78,15 @@ box-shadow: 7px 6px 15px 1px rgba(0,0,0,0.62);
     width: 17px;
 }
                 
+
+.ant-checkbox-inner{
+    border-color: #6366F1;
+    background-color: #6366F1 ;
+    border-radius: 5px !important;
+    font-size: 20px;
+}
+
+/* .ant-checkbox-ant-checkbox-inner span {
+    font-weight: 100 !important;
+    font-size: 20px
+} */

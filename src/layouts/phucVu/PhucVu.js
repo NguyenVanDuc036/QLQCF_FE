@@ -24,7 +24,8 @@ import Swal from "sweetalert2";
 import { Redirect } from "react-router-dom";
 import { history } from "../../App";
 import { layDanhSachBanAction } from "../../redux/actions/QuanLyBanAction";
-
+import DanhSachOrder from './danhSachOrder/DanhSachOrder'
+import { layDanhSachOrderAction, layDanhSachOrderDetailAction, layDanhSachOrderTakeAwayAction } from "../../redux/actions/QuanLyOrderAction";
 const { Search } = Input;
 
 const { TabPane } = Tabs;
@@ -41,6 +42,10 @@ export default function PhucVu() {
 
   useEffect(() => {
     dispatch(layDanhSachBanAction(""));
+    // dispatch(layDanhSachOrderAction());
+    dispatch(layDanhSachOrderDetailAction());
+
+    
     if(!localStorage.getItem('userLogin')){
         Swal.fire({
          icon: 'error',
@@ -50,17 +55,29 @@ export default function PhucVu() {
        })
        history.push('/')
     }
+
+    if(userLogin.position != 'phucVu'){
+      Swal.fire({
+        icon: 'error',
+        title: 'Bạn không có quyền truy cập',
+        text: 'Bạn cần đăng nhập bằng tài khoản của phục vụ!',
+      })
+      history.push('/')
+    }
+
+
   }, []);
 
 
   const [size, setSize] = useState("large");
-  const onSearch = (value) => console.log(value);
+
   const onChange = (e) => {
     setSize(e.target.value);
   };
 
   useEffect(() => {
     dispatch(layDanhSachNuocUongAction(""));
+    dispatch(layDanhSachOrderTakeAwayAction(""))
   }, []);
   
   const { danhSachNuocUong } = useSelector(
@@ -71,14 +88,20 @@ export default function PhucVu() {
     (state) => state.QuanLyBanReducer
   );
 
-  console.log('check', tongBanTrong);
 
 
-  console.log({danhSachNuocUong});
 
   const { chiTietBill } = useSelector(
     (state) => state.QuanLyNuocUongReducer
   );
+
+  // const { danhSachOrder } = useSelector(
+  //   (state) => state.QuanLyOrderReducer
+  // );
+const { danhSachOrder } = useSelector((state) => state.QuanLyPhaCheReducer);
+const { danhSachOrderTakeAway } = useSelector((state) => state.QuanLyOrderReducer);
+
+
 
   // Lấy tabActive
   const { tabActive } = useSelector(
@@ -141,37 +164,7 @@ export default function PhucVu() {
       </div>
     </Fragment>
   );
-  const operationsOders = (
-    <Fragment>
-      <Space className="mr-5" direction="vertical">
-        <Search
-          placeholder="Tìm bàn"
-          onSearch={onSearch}
-          style={{
-            width: 200,
-          }}
-        />
-      </Space>
-      <div class="input-group ">
-        <div class="input-group-prepend ">
-          <span class="input-group-text" id="basic-addon1">
-            <i class="fas fa-table"></i>
-          </span>
-        </div>
-        <input
-          placeholder="Tìm bàn"
-          class="form-control"
-          type="text"
-          name="city"
-          list="cityname"
-        />
-        <datalist id="cityname">
-          <option value="Boston" />
-          <option value="Cambridge" />
-        </datalist>
-      </div>
-    </Fragment>
-  );
+ 
 
 
 
@@ -212,21 +205,7 @@ export default function PhucVu() {
           }
           key="1"
         >
-          <Tabs
-            tabBarExtraContent={operationsOders}
-            defaultActiveKey="1"
-            type="card"
-            size={size}
-          >
-            <TabPane className="menu-item tab-border" tab="Chờ thanh toán (1)" key="1">
-              <Bills/>
-              <div  className="content-bottom">
-                <h5 className="p-3"  >Tổng số order : <span className="text-success" >4</span></h5>
-              </div>
-            </TabPane>
-            <TabPane className="menu-item" tab="Đang lưu (1) " key="2"></TabPane>
-
-          </Tabs>
+          <DanhSachOrder danhSachOrderTakeAway={danhSachOrderTakeAway} danhSachOrder={danhSachOrder}/>
         </TabPane>
         
         <TabPane

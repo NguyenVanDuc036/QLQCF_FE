@@ -16,10 +16,16 @@ import { history } from '../../../../App';
 export default function EmployeeList() {
   const dispatch = useDispatch();
 
+  // Sẽ call api về server để lấy danh sách nhân viên, sau đó đẩy dữ liệu lên redux
   useEffect(() => {
+
     dispatch(layDanhSachNhanVienAction(""));
+    
   }, []);
 
+
+
+  // Lấy danh sách nhân viên từ redux về để sử dụng
   const { danhSachNhanVien } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
@@ -100,6 +106,7 @@ export default function EmployeeList() {
                   }).then((result) => {
                     if (result.isConfirmed) {
 
+                      // Gọi api về server để xóa nhân viên
                       dispatch(xoaNhanVienAction(user.id))
 
                       Swal.fire(

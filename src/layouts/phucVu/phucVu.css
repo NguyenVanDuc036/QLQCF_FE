@@ -58,7 +58,6 @@ box-shadow: 4px 4px 17px -3px rgba(0,0,0,0.76);
 
 .ant-tabs-content.ant-tabs-content-top {
     padding: 0 2rem;
-    height: 45rem;
 }
 
 .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap{
@@ -93,7 +92,7 @@ box-shadow: 4px 4px 17px -3px rgba(0,0,0,0.76);
 }
 
 .menu-item{
-    height: 40rem;
+    height: 39.5rem !important;
     padding: 0;
     border-radius: 10px;
 }
@@ -143,7 +142,7 @@ box-shadow: 4px 4px 17px -3px rgba(0,0,0,0.76);
     border-bottom-right-radius: 15px;
 }
 .plush-order .ant-tabs-content {
-    height: 40rem !important;
+    height: 39rem !important;
     overflow: scroll;
 }
 
@@ -163,11 +162,12 @@ box-shadow: 4px 4px 17px -3px rgba(0,0,0,0.76);
 
 .plush-order .info-user{
     height: 3rem;
-    width: 11.5%;
+    width: 15%;
     border-radius: 5px;
     border: 2px solid gray;
     display: flex;
     align-items: center;
+    cursor: pointer;
     justify-content: center;
     margin-left: 2rem;
     font-size: 15px;
@@ -195,7 +195,21 @@ box-shadow: 2px 5px 15px -1px rgba(0,0,0,0.69);
     margin-right: 0;
 }
 .button-demo .template .p-button i {
-    line-height: 2.25rem;
+    font-size: 20px;
+    width: 3rem;
+    line-height: 3.5rem !important;
+}
+
+
+
+.xac-nhan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.button-demo .template .p-button{
+    padding: 1rem;
 }
 .button-demo .template .p-button.google {
     background: linear-gradient(to left, var(--purple-600) 50%, var(--purple-700) 50%);
@@ -404,8 +418,8 @@ box-shadow: 2px 5px 15px -1px rgba(0,0,0,0.69);
 }
 
 .banDatTruoc {
-    border: 3px solid purple!important;
-    background: purple!important;
+    border: 3px solid orangered!important;
+    background: orange!important;
     border-radius: 5px!important;
     width: 45px;
     height: 35px;
@@ -528,3 +542,5 @@ box-shadow: 7px 7px 7px 4px rgba(0,0,0,0.48);
     top: 20%;
     left: 50%;
 }
+
+

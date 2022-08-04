@@ -14,11 +14,21 @@ export default function Login() {
     if(localStorage.getItem('userLogin')){
       var userLogin = JSON.parse(localStorage.getItem('userLogin'));
       
-      if(userLogin.position == 'phucVu'){
-        history.push('/phucvu')
-      }else if(userLogin.position == 'quanLy'){
-        history.push('/admin/home')
-      }
+      // if(userLogin.position == 'phucVu'){
+      //   history.push('/phucvu')
+      // }
+      
+      // if(userLogin.position == 'quanLy'){
+      //   history.push('/admin/home')
+      // }
+      
+      // if(userLogin.position == 'thuNgan'){
+      //   history.push('/thungan')
+      // }
+      
+      // if(userLogin.position == 'phaChe'){
+      //   history.push('/phache')
+      // }
        
     }
 
